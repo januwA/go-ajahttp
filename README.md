@@ -1,6 +1,11 @@
 
 golang http clint
 
+## Get Package
+```sh
+$ go get github.com/januwA/go-ajahttp
+```
+
 ## Example
 ```go
 clint := ajahttp.NewAjaClient()
