@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"path/filepath"
 	"strings"
 )
 
@@ -113,7 +112,12 @@ func (my *AjaClient) Request(opt *AjaOption) (*http.Response, error) {
 	if my.BaseURL == nil || tmpUrl.IsAbs() {
 		u = tmpUrl
 	} else {
-		rel := &url.URL{Path: filepath.Join(my.BaseURL.Path, urlNoQuery)}
+		path, err := url.JoinPath(my.BaseURL.Path, urlNoQuery)
+		if err != nil {
+			return nil, err
+		}
+
+		rel := &url.URL{Path: path}
 		u = my.BaseURL.ResolveReference(rel)
 	}
 
