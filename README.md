@@ -20,13 +20,11 @@ clint.PostJson("/", map[string]any{})
 
 // post file
 data := ajahttp.NewFormData()
-
 data.Append("name", "ajahttp")
-
 f, _ := os.Open("/root/a.jpg")
 defer f.Close()
-
 data.AppendFile("file", f, f.Name())
+
 clint.PostFormData("/", data)
 
 
